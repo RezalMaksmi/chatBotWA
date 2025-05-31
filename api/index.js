@@ -7,6 +7,11 @@ app.use(express.json());
 
 const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzretqoduCJZyKcNqCQsDKAIoBFmxCAZTmKvAPcCcwYeGuMWin_MR7YXd-wYQK64YvO/exec";
 
+// ✅ Tambahkan endpoint "/" untuk cek server aktif
+app.get('/', (req, res) => {
+  res.send('🚀 Server is up and running!');
+});
+
 app.post('/webhook', async (req, res) => {
     const message = req.body.message || "";
     const phone = req.body.number || "";
