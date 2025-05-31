@@ -1,16 +1,15 @@
 const express = require('express');
-const serverless = require('serverless-http'); // adapter untuk vercel
+const serverless = require('serverless-http');
 const axios = require('axios');
+
 const app = express();
 app.use(express.json());
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzretqoduCJZyKcNqCQsDKAIoBFmxCAZTmKvAPcCcwYeGuMWin_MR7YXd-wYQK64YvO/exec";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz...";
 
 app.post('/webhook', async (req, res) => {
     const message = req.body.message || "";
     const phone = req.body.number || "";
-
-    console.log("📩 Data masuk:", req.body); // Tambahkan ini
 
     const parts = message.split("|");
     if (parts.length !== 3) {
@@ -27,13 +26,12 @@ app.post('/webhook', async (req, res) => {
             jumlah
         });
 
-        // Kirim balasan ke Flow Builder
-        return res.send({ reply: replyMessage });
+        res.send({ reply: replyMessage });
     } catch (err) {
         console.error(err);
-        return res.status(500).send({ reply: "❌ Gagal menyimpan data." });
+        res.status(500).send({ reply: "❌ Gagal menyimpan data." });
     }
 });
 
 module.exports = app;
-module.exports.handler = serverless(app); // untuk Vercel
+module.exports.handler = serverless(app); // ⬅️ ini penting!
