@@ -1,4 +1,5 @@
 const express = require('express');
+const serverless = require('serverless-http'); // adapter untuk vercel
 const axios = require('axios');
 const app = express();
 app.use(express.json());
@@ -34,4 +35,5 @@ app.post('/webhook', async (req, res) => {
     }
 });
 
-app.listen(3000, () => console.log("Server jalan di port 3000"));
+module.exports = app;
+module.exports.handler = serverless(app); // untuk Vercel
