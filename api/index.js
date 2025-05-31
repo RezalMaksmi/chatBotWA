@@ -5,7 +5,7 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 
-const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbz...";
+const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbzretqoduCJZyKcNqCQsDKAIoBFmxCAZTmKvAPcCcwYeGuMWin_MR7YXd-wYQK64YvO/exec";
 
 app.post('/webhook', async (req, res) => {
     const message = req.body.message || "";
